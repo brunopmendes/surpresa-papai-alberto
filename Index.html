@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chá de Bebê</title>
+<meta name="description" content="Convite para o nosso Chá de Bebê">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fff7f8; --card:#ffffff; --ink:#4a3a40; --muted:#8a7479;
+    --sage:#f0a8b8; --sage-dark:#d0647e; --peach:#ffd3dc; --cream:#fdecef;
+    --line:#f3dde2; --radius:20px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:"Nunito",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:600;line-height:1.15}
+  a{color:inherit}
+  .wrap{max-width:760px;margin:0 auto;padding:0 16px}
+
+  /* HERO */
+  .hero{position:relative;overflow:hidden;text-align:center;padding:72px 0 56px;
+    background:radial-gradient(circle at 15% 20%,var(--peach) 0 90px,transparent 91px),
+               radial-gradient(circle at 88% 30%,#f7e1f0 0 120px,transparent 121px),
+               radial-gradient(circle at 70% 95%,var(--cream) 0 140px,transparent 141px),var(--bg)}
+  .hero .tag{display:inline-block;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sage-dark);font-weight:700;margin-bottom:14px}
+  .hero h1{font-size:clamp(2.4rem,9vw,4.2rem);margin-bottom:10px}
+  .hero .pais{font-size:1.1rem;color:var(--muted)}
+  .hero .when{margin-top:22px;display:inline-flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:600;font-size:.95rem}
+  .cloud{font-size:3rem;display:block;margin-bottom:8px;animation:float 4s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-8px)}}
+
+  /* COUNTDOWN */
+  .countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:-28px auto 0;max-width:520px;position:relative}
+  .cd{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 6px;text-align:center;box-shadow:0 6px 20px rgba(61,58,54,.06)}
+  .cd b{display:block;font-family:"Fraunces",serif;font-size:1.8rem;color:var(--sage-dark)}
+  .cd span{font-size:.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+
+  section{padding:56px 0 8px}
+  section h2{font-size:1.9rem;margin-bottom:6px;text-align:center}
+  section .sub{text-align:center;color:var(--muted);margin-bottom:26px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+
+  .msg{font-size:1.1rem;text-align:center;font-style:italic;color:var(--muted);max-width:560px;margin:0 auto}
+
+  /* DETALHES */
+  .info{display:grid;gap:14px}
+  .row{display:flex;gap:14px;align-items:flex-start}
+  .ico{flex:0 0 44px;height:44px;border-radius:12px;background:var(--cream);display:grid;place-items:center;font-size:1.3rem}
+  .row small{display:block;color:var(--muted);font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}
+  .btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+  .btn{appearance:none;border:0;cursor:pointer;font:inherit;font-weight:700;text-decoration:none;
+    background:var(--sage-dark);color:#fff;padding:12px 18px;border-radius:12px;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,opacity .15s}
+  .btn:hover{transform:translateY(-1px);opacity:.92}
+  .btn.ghost{background:transparent;color:var(--sage-dark);border:2px solid var(--sage)}
+
+  /* PRESENTES */
+  .fraldas{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:22px}
+  .fr{background:var(--cream);border-radius:14px;padding:14px;text-align:center}
+  .fr b{font-family:"Fraunces",serif;font-size:1.4rem;display:block}
+  .fr span{font-size:.85rem;color:var(--muted)}
+  .gifts{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+  .gifts li{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;gap:10px;align-items:center;background:var(--card)}
+  .segredo{background:var(--ink);color:#fff;text-align:center;padding:10px 16px;font-weight:700;font-size:.92rem}
+  .pix{margin-top:22px;background:var(--cream);border-radius:16px;padding:18px;text-align:center}
+  .sugestao{margin-top:12px;font-weight:600}
+  .sugestao b{font-family:"Fraunces",serif;font-size:1.6rem;color:var(--sage-dark)}
+  .sugestao span{font-size:.85rem;color:var(--muted);font-weight:400}
+  .mural{display:grid;gap:12px;margin-top:22px}
+  .bilhete{background:var(--cream);border-radius:16px;padding:16px 18px;position:relative}
+  .bilhete p{white-space:pre-wrap;word-break:break-word}
+  .bilhete .autor{margin-top:8px;font-weight:700;color:var(--sage-dark);font-size:.9rem}
+  .vazio{text-align:center;color:var(--muted);padding:12px 0}
+  .contador{font-size:.8rem;color:var(--muted);text-align:right;margin-top:-8px}
+  .btn[disabled]{opacity:.6;cursor:wait}
+  .pix code{display:block;word-break:break-all;font-size:1rem;margin:8px 0 14px;font-weight:700}
+
+  /* FORMULÁRIO */
+  form{display:grid;gap:14px}
+  label{font-weight:700;font-size:.9rem;display:grid;gap:6px}
+  input,select,textarea{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);width:100%}
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--sage);border-color:transparent}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  footer{text-align:center;padding:56px 16px 40px;color:var(--muted);font-size:.9rem}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 20px;border-radius:12px;transition:transform .3s;font-weight:600;z-index:10}
+  .toast.show{transform:translateX(-50%) translateY(0)}
+
+  @media (max-width:480px){
+    .two{grid-template-columns:1fr}
+    .cd b{font-size:1.4rem}
+    .btn{width:100%;justify-content:center}
+  }
+</style>
+</head>
+<body>
+
+<div class="segredo">🤫 É SURPRESA! Não conte nada pro <span id="segPapai"></span>, combinado?</div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="cloud">🎀</span>
+    <span class="tag">Chá de Bebê Surpresa</span>
+    <h1 id="bebe"></h1>
+    <p class="pais" id="pais"></p>
+    <div class="when">
+      <span class="pill" id="pillData"></span>
+      <span class="pill" id="pillHora"></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="countdown" id="countdown">
+    <div class="cd"><b id="d">0</b><span>dias</span></div>
+    <div class="cd"><b id="h">0</b><span>horas</span></div>
+    <div class="cd"><b id="m">0</b><span>min</span></div>
+    <div class="cd"><b id="s">0</b><span>seg</span></div>
+  </div>
+
+  <section>
+    <p class="msg" id="mensagem"></p>
+  </section>
+
+  <section id="detalhes">
+    <h2>Detalhes</h2>
+    <p class="sub">Anota aí pra não esquecer 💛</p>
+    <div class="card">
+      <div class="info">
+        <div class="row"><div class="ico">📅</div><div><small>Data</small><span id="infoData"></span></div></div>
+        <div class="row"><div class="ico">⏰</div><div><small>Horário</small><span id="infoHora"></span></div></div>
+        <div class="row"><div class="ico">📍</div><div><small>Local</small><strong id="infoLocal"></strong><br><span id="infoEnd"></span></div></div>
+      </div>
+      <div class="btns">
+        <a class="btn" id="btnMapa" target="_blank" rel="noopener">🗺️ Ver no mapa</a>
+        <button class="btn ghost" id="btnAgenda">📆 Salvar na agenda</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="presentes">
+    <h2>Sugestões de presente</h2>
+    <p class="sub">Qualquer carinho é bem-vindo! Se quiser uma ideia:</p>
+    <div class="card">
+      <h3 style="margin-bottom:12px">Fraldas por tamanho</h3>
+      <div class="fraldas" id="fraldas"></div>
+      <h3 style="margin-bottom:12px">Outros itens</h3>
+      <ul class="gifts" id="gifts"></ul>
+      <div class="pix">
+        <strong>Presente coletivo do time 🎁</strong>
+        <p style="color:var(--muted);font-size:.92rem">Prefere contribuir pro presentão coletivo? Manda um Pix:</p>
+        <p class="sugestao">Valor sugerido: <b id="pixValor"></b><br><span>(o preço de um pacote de fralda 😉)</span></p>
+        <code id="pixKey"></code>
+        <button class="btn" id="btnPix">📋 Copiar chave Pix</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="mensagens">
+    <h2>Deixe sua mensagem</h2>
+    <p class="sub">Um recadinho pra bebê e pro papai. Vamos juntar tudo e entregar pro <span id="msgPapai"></span> no dia 💗</p>
+    <div class="card">
+      <form id="formMsg">
+        <label>Seu nome
+          <input id="msgNome" required maxlength="80" placeholder="Ex.: Ana, do time Joogle">
+        </label>
+        <label>Seu recado
+          <textarea id="msgTexto" required maxlength="1000" rows="4" placeholder="Escreva algo bonito pra pequena e pro papai..."></textarea>
+        </label>
+        <p class="contador"><span id="msgCont">0</span>/1000</p>
+        <button class="btn" type="submit" id="btnMsg">💌 Enviar recado</button>
+      </form>
+      <div class="mural" id="mural"></div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  Feito com 💗 pelo <span id="footOrg"></span>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   ✏️ EDITE SÓ AQUI — todas as informações do chá
+   ========================================================= */
+const CONFIG = {
+  papai: "Alberto",
+  organizadores: "time Joogle",
+  bebe: "Vem aí a menina do Alberto!",
+  pais: "Um chá surpresa organizado com carinho pelo time Joogle",
+  // Data e hora no formato AAAA-MM-DDTHH:MM (horário de Brasília)
+  data: "2026-10-26T10:00",
+  duracaoHoras: 4,
+  local: "Itaú CEIC",
+  endereco: "Praça Alfredo Egydio de Souza Aranha, 100 — Parque Jabaquara, São Paulo - SP",
+  pix: "seu-email@exemplo.com",
+  pixValor: "R$ 70,00",
+  // URL do Google Apps Script que salva os recados (veja apps-script.gs)
+  // Termina em "/exec"
+  mensagensApi: "",
+  // true = mostra os recados num mural no site; false = só salva na planilha
+  mostrarMensagens: true,
+  mensagem: "Uma princesinha está chegando e o Alberto nem imagina o que estamos preparando! Vem celebrar com a gente — e guarda segredo 🤫",
+  fraldas: [
+    { tam: "P",  desc: "até 6 kg" },
+    { tam: "M",  desc: "5 a 9 kg" },
+    { tam: "G",  desc: "9 a 12 kg" },
+    { tam: "XG", desc: "a partir de 12 kg" }
+  ],
+  presentes: [
+    "🧻 Lenços umedecidos",
+    "🧴 Pomada para assaduras",
+    "🛁 Kit higiene",
+    "👗 Body e roupinhas (tam. P ou M)",
+    "🎀 Laçinhos e meias",
+    "🧸 Mantinha",
+    "🍼 Fralda de pano"
+  ]
+};
+/* ========================================================= */
+
+const $ = id => document.getElementById(id);
+const dt = new Date(CONFIG.data + ":00-03:00");
+const fmtData = dt.toLocaleDateString("pt-BR",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"America/Sao_Paulo"});
+const fmtCurta = dt.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit",year:"numeric",timeZone:"America/Sao_Paulo"});
+const fmtHora = dt.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit",timeZone:"America/Sao_Paulo"});
+
+document.title = "Chá de Bebê Surpresa · " + CONFIG.papai;
+$("bebe").textContent = CONFIG.bebe;
+$("segPapai").textContent = CONFIG.papai;
+$("footOrg").textContent = CONFIG.organizadores;
+$("pais").textContent = CONFIG.pais;
+$("pillData").textContent = "📅 " + fmtCurta;
+$("pillHora").textContent = "⏰ " + fmtHora;
+$("mensagem").textContent = "“" + CONFIG.mensagem + "”";
+$("infoData").textContent = fmtData.charAt(0).toUpperCase() + fmtData.slice(1);
+$("infoHora").textContent = fmtHora;
+$("infoLocal").textContent = CONFIG.local;
+$("infoEnd").textContent = CONFIG.endereco;
+$("btnMapa").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.local + ", " + CONFIG.endereco);
+$("pixKey").textContent = CONFIG.pix;
+$("pixValor").textContent = CONFIG.pixValor;
+$("msgPapai").textContent = CONFIG.papai;
+
+// ===== Recados =====
+$("msgTexto").oninput = () => $("msgCont").textContent = $("msgTexto").value.length;
+
+function renderMural(lista){
+  const mural = $("mural");
+  mural.innerHTML = "";
+  if (!lista.length){ mural.innerHTML = '<p class="vazio">Seja o primeiro a deixar um recado 💗</p>'; return; }
+  lista.forEach(m => {
+    const div = document.createElement("div"); div.className = "bilhete";
+    const p = document.createElement("p"); p.textContent = m.recado;
+    const a = document.createElement("div"); a.className = "autor"; a.textContent = "— " + m.nome;
+    div.append(p, a); mural.append(div);
+  });
+}
+
+async function carregarMural(){
+  if (!CONFIG.mostrarMensagens || !CONFIG.mensagensApi) return;
+  try {
+    const r = await fetch(CONFIG.mensagensApi);
+    const j = await r.json();
+    renderMural(j.mensagens || []);
+  } catch { $("mural").innerHTML = '<p class="vazio">Não deu pra carregar os recados agora.</p>'; }
+}
+carregarMural();
+
+$("formMsg").onsubmit = async e => {
+  e.preventDefault();
+  const nome = $("msgNome").value.trim(), recado = $("msgTexto").value.trim();
+  if (!nome || !recado) return;
+  if (!CONFIG.mensagensApi){ toast("Recados ainda não configurados"); return; }
+  const btn = $("btnMsg"); btn.disabled = true; btn.textContent = "Enviando...";
+  try {
+    const r = await fetch(CONFIG.mensagensApi, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ nome, recado })
+    });
+    const j = await r.json();
+    if (!j.ok) throw 0;
+    $("formMsg").reset(); $("msgCont").textContent = "0";
+    toast("Recado enviado! 💗");
+    carregarMural();
+  } catch { toast("Ops, não foi. Tenta de novo?"); }
+  finally { btn.disabled = false; btn.textContent = "💌 Enviar recado"; }
+};
+
+$("fraldas").innerHTML = CONFIG.fraldas.map(f => `<div class="fr"><b>${f.tam}</b><span>${f.desc}</span></div>`).join("");
+$("gifts").innerHTML = CONFIG.presentes.map(p => `<li>${p}</li>`).join("");
+
+// Contagem regressiva
+function tick(){
+  let diff = Math.max(0, dt - new Date());
+  if (diff === 0){ $("countdown").innerHTML = '<div class="cd" style="grid-column:1/-1"><b>É hoje! 🎉</b></div>'; return; }
+  const s = Math.floor(diff/1000);
+  $("d").textContent = Math.floor(s/86400);
+  $("h").textContent = Math.floor(s%86400/3600);
+  $("m").textContent = Math.floor(s%3600/60);
+  $("s").textContent = s%60;
+  setTimeout(tick, 1000);
+}
+tick();
+
+function toast(t){ const el=$("toast"); el.textContent=t; el.classList.add("show"); setTimeout(()=>el.classList.remove("show"),2200); }
+
+// Copiar Pix
+$("btnPix").onclick = async () => {
+  try { await navigator.clipboard.writeText(CONFIG.pix); toast("Chave Pix copiada!"); }
+  catch { prompt("Copie a chave Pix:", CONFIG.pix); }
+};
+
+// Salvar na agenda (.ics)
+$("btnAgenda").onclick = () => {
+  const end = new Date(dt.getTime() + CONFIG.duracaoHoras*3600000);
+  const f = d => d.toISOString().replace(/[-:]/g,"").split(".")[0] + "Z";
+  const ics = [
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Cha de Bebe//PT-BR","BEGIN:VEVENT",
+    "UID:" + Date.now() + "@chadebebe",
+    "DTSTAMP:" + f(new Date()),
+    "DTSTART:" + f(dt), "DTEND:" + f(end),
+    "SUMMARY:Chá de Bebê Surpresa - " + CONFIG.papai + " (não contar!)",
+    "LOCATION:" + (CONFIG.local + ", " + CONFIG.endereco).replace(/,/g,"\\,"),
+    "END:VEVENT","END:VCALENDAR"
+  ].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics],{type:"text/calendar"}));
+  a.download = "cha-de-bebe.ics";
+  a.click();
+};
+</script>
+</body>
+</html>
