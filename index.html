@@ -70,13 +70,6 @@
   .sugestao{margin-top:12px;font-weight:600}
   .sugestao b{font-family:"Fraunces",serif;font-size:1.6rem;color:var(--sage-dark)}
   .sugestao span{font-size:.85rem;color:var(--muted);font-weight:400}
-  .mural{display:grid;gap:12px;margin-top:22px}
-  .bilhete{background:var(--cream);border-radius:16px;padding:16px 18px;position:relative}
-  .bilhete p{white-space:pre-wrap;word-break:break-word}
-  .bilhete .autor{margin-top:8px;font-weight:700;color:var(--sage-dark);font-size:.9rem}
-  .vazio{text-align:center;color:var(--muted);padding:12px 0}
-  .contador{font-size:.8rem;color:var(--muted);text-align:right;margin-top:-8px}
-  .btn[disabled]{opacity:.6;cursor:wait}
   .pix code{display:block;word-break:break-all;font-size:1rem;margin:8px 0 14px;font-weight:700}
 
   /* FORMULÁRIO */
@@ -160,23 +153,6 @@
     </div>
   </section>
 
-  <section id="mensagens">
-    <h2>Deixe sua mensagem</h2>
-    <p class="sub">Um recadinho pra bebê e pro papai. Vamos juntar tudo e entregar pro <span id="msgPapai"></span> no dia 💗</p>
-    <div class="card">
-      <form id="formMsg">
-        <label>Seu nome
-          <input id="msgNome" required maxlength="80" placeholder="Ex.: Ana, do time Joogle">
-        </label>
-        <label>Seu recado
-          <textarea id="msgTexto" required maxlength="1000" rows="4" placeholder="Escreva algo bonito pra pequena e pro papai..."></textarea>
-        </label>
-        <p class="contador"><span id="msgCont">0</span>/1000</p>
-        <button class="btn" type="submit" id="btnMsg">💌 Enviar recado</button>
-      </form>
-      <div class="mural" id="mural"></div>
-    </div>
-  </section>
 
 </div>
 
@@ -200,13 +176,8 @@ const CONFIG = {
   duracaoHoras: 4,
   local: "Itaú CEIC",
   endereco: "Praça Alfredo Egydio de Souza Aranha, 100 — Parque Jabaquara, São Paulo - SP",
-  pix: "seu-email@exemplo.com",
+  pix: "6bf735e9-0694-40e6-96ab-ddfa79c3bd48",
   pixValor: "R$ 70,00",
-  // URL do Google Apps Script que salva os recados (veja apps-script.gs)
-  // Termina em "/exec"
-  mensagensApi: "",
-  // true = mostra os recados num mural no site; false = só salva na planilha
-  mostrarMensagens: true,
   mensagem: "Uma princesinha está chegando e o Alberto nem imagina o que estamos preparando! Vem celebrar com a gente — e guarda segredo 🤫",
   fraldas: [
     { tam: "P",  desc: "até 6 kg" },
@@ -247,53 +218,7 @@ $("infoEnd").textContent = CONFIG.endereco;
 $("btnMapa").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(CONFIG.local + ", " + CONFIG.endereco);
 $("pixKey").textContent = CONFIG.pix;
 $("pixValor").textContent = CONFIG.pixValor;
-$("msgPapai").textContent = CONFIG.papai;
 
-// ===== Recados =====
-$("msgTexto").oninput = () => $("msgCont").textContent = $("msgTexto").value.length;
-
-function renderMural(lista){
-  const mural = $("mural");
-  mural.innerHTML = "";
-  if (!lista.length){ mural.innerHTML = '<p class="vazio">Seja o primeiro a deixar um recado 💗</p>'; return; }
-  lista.forEach(m => {
-    const div = document.createElement("div"); div.className = "bilhete";
-    const p = document.createElement("p"); p.textContent = m.recado;
-    const a = document.createElement("div"); a.className = "autor"; a.textContent = "— " + m.nome;
-    div.append(p, a); mural.append(div);
-  });
-}
-
-async function carregarMural(){
-  if (!CONFIG.mostrarMensagens || !CONFIG.mensagensApi) return;
-  try {
-    const r = await fetch(CONFIG.mensagensApi);
-    const j = await r.json();
-    renderMural(j.mensagens || []);
-  } catch { $("mural").innerHTML = '<p class="vazio">Não deu pra carregar os recados agora.</p>'; }
-}
-carregarMural();
-
-$("formMsg").onsubmit = async e => {
-  e.preventDefault();
-  const nome = $("msgNome").value.trim(), recado = $("msgTexto").value.trim();
-  if (!nome || !recado) return;
-  if (!CONFIG.mensagensApi){ toast("Recados ainda não configurados"); return; }
-  const btn = $("btnMsg"); btn.disabled = true; btn.textContent = "Enviando...";
-  try {
-    const r = await fetch(CONFIG.mensagensApi, {
-      method: "POST",
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify({ nome, recado })
-    });
-    const j = await r.json();
-    if (!j.ok) throw 0;
-    $("formMsg").reset(); $("msgCont").textContent = "0";
-    toast("Recado enviado! 💗");
-    carregarMural();
-  } catch { toast("Ops, não foi. Tenta de novo?"); }
-  finally { btn.disabled = false; btn.textContent = "💌 Enviar recado"; }
-};
 
 $("fraldas").innerHTML = CONFIG.fraldas.map(f => `<div class="fr"><b>${f.tam}</b><span>${f.desc}</span></div>`).join("");
 $("gifts").innerHTML = CONFIG.presentes.map(p => `<li>${p}</li>`).join("");
